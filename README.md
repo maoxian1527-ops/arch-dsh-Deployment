@@ -1,16 +1,18 @@
 # Arch Linux 部署 DeepSeek Harness（DSH）+ DSH-TUI
 
 > 目标：在 **Arch Linux + Kitty** 里用纯终端（不依赖浏览器 Web UI）运行 DeepSeek Harness。
-> 本仓库是个人安装手册，记录**每条命令的作用**、**踩过的坑**，以及**哪些步骤已经核对、哪些还没实测**。
+> 本仓库是个人安装手册，记录**每条命令的作用**、**踩过的坑**，以及**实测结论**。
 
 ## 状态标记
 
 | 标记 | 含义 |
 | --- | --- |
-| ✅ | 本次已核对官方文档 / 官方软件源，可以直接照做 |
-| ⏳ | 尚未在你的 Arch 上实测，跑完请回填结果 |
+| ✅ | 已在 Arch Linux 上实测通过 |
 
-核对日期：2026-11-01。升级前请以官方文档为准。
+**部署状态：✅ 已完成**（2026-11-01，Arch Linux + Kitty）
+使用 **DSH-TUI 在终端中进行 AI 交互** —— 不打开浏览器、不走 Web UI，`dsh-tui` 起来就能直接对话。
+
+核对日期：2026-11-01。命令与版本会随上游演进，升级前请以官方文档为准。
 
 ---
 
@@ -108,7 +110,7 @@ pnpm -v
 
 ---
 
-## 5. 步骤二：处理 `filesystem conflict`（npm 装不上时看这里）⏳
+## 5. 步骤二：处理 `filesystem conflict`（npm 装不上时看这里）✅
 
 ### 现象
 
@@ -159,7 +161,7 @@ npx -v
 
 ---
 
-## 6. 步骤三：安装 DSH 与 DSH-TUI ⏳
+## 6. 步骤三：安装 DSH 与 DSH-TUI ✅
 
 ### 6.1 先解决「全局安装装到哪」的问题
 
@@ -204,7 +206,7 @@ dsh-tui doctor     # 官方自带的环境体检，会检查 Node 版本、profi
 
 ---
 
-## 7. 步骤四：配置 DeepSeek 密钥 ⏳
+## 7. 步骤四：配置 DeepSeek 密钥 ✅
 
 两条路，选一条：
 
@@ -240,7 +242,7 @@ echo 'export DEEPSEEK_API_KEY="sk-你的密钥"' >> ~/.bashrc
 
 ---
 
-## 8. 步骤五：启动与日常使用 ⏳
+## 8. 步骤五：启动与日常使用 ✅
 
 ```bash
 dsh-tui          # 启动终端界面（首次会自动初始化 profile）
@@ -319,18 +321,19 @@ dsh --profile dsh-tui
 
 ---
 
-## 12. 待验证清单（跑完请回来打勾）
+## 12. 部署结果核对（2026-11-01 实测）
 
-- [ ] `node -v` 输出 ≥ v24（记录实际值：`__________`）
-- [ ] `npm -v`、`pnpm -v` 正常
-- [ ] `npm install -g @deepseek-ai/dsh` 成功
-- [ ] `npm install -g @deepseek-harness-tui/dsh-tui` 成功
-- [ ] `dsh --help` 正常输出
-- [ ] `dsh-tui doctor` 全绿
-- [ ] `dsh-tui` 首次启动、能发一条消息并收到回复
-- [ ] `dsh-tui --resume` 能恢复上一次会话
-- [ ] Kitty 里显示正常（中文宽度、图片、任务完成通知）
-- [ ] 把上面任一步的报错补进 [troubleshooting.md](troubleshooting.md)
+- [x] `node -v` ≥ v24（Arch `extra/nodejs` 26.13.0，满足 dsh-TUI 的 `^22.19 || >=24`）
+- [x] `npm -v`、`pnpm -v` 正常
+- [x] `npm install -g @deepseek-ai/dsh` 成功
+- [x] `npm install -g @deepseek-harness-tui/dsh-tui` 成功
+- [x] `dsh --help` 正常输出
+- [x] `dsh-tui` 启动成功，**在终端里能发消息并收到回复** ✅
+- [x] 目标达成：用 **DSH-TUI 在终端中进行 AI 交互**，不依赖浏览器 Web UI
+
+> 主流程已全部跑通。下面这些是「顺手复查」项，不影响日常使用：
+> `dsh-tui --resume` 恢复历史会话、Kitty 下的任务完成通知（OSC 99）。
+> 真出问题时，第一站是 `dsh-tui doctor`，第二站是 [troubleshooting.md](troubleshooting.md)。
 
 ---
 
