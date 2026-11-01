@@ -1,0 +1,47 @@
+# ---- 凭据 / 隐私（最重要的一段，别删） ----
+.env
+*.env
+!.env.example
+.credentials.yaml
+credentials.yaml
+credentials.json
+auth.json
+.dsh/
+.dsh-tui/
+*.key
+*.pem
+secrets/
+
+# ---- Node ----
+node_modules/
+.npm/
+.npm-cache/
+.pnpm-store/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- 构建产物 ----
+dist/
+build/
+out/
+lib/
+*.tgz
+*.tar.gz
+*.zip
+
+# ---- 备份与日志 ----
+*.log
+npm.backup/
+backup/
+*.bak
+*.backup-*
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
